@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f8f5;
+  --foreground: #14211a;
+  --surface: #ffffff;
+  --muted: #5d6b63;
+  --line: #e2e7e1;
+  --brand: #0b6b3a;      /* 농협 초록 */
+  --brand-deep: #084d2a;
+  --brand-soft: #e6f2ea;
+  --gold: #c9a227;       /* 가을 골드 */
+  --gold-soft: #fbf3d9;
+  --danger: #b42318;
+  --danger-soft: #fee4e2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: var(--font-noto-kr), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: var(--font-display), "Nanum Myeongjo", serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-brand text-white hover:bg-brand-deep; }
+  .btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-white border border-line text-foreground hover:bg-brand-soft; }
+  .btn-danger { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed bg-danger-soft text-danger hover:bg-red-200; }
+  .card { @apply rounded-xl border border-line bg-surface p-5 shadow-sm; }
+  .input { @apply w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20; }
+  .label { @apply block text-sm font-medium text-foreground mb-1.5; }
+  .hint { @apply text-xs text-muted mt-1; }
+  .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium; }
+}
+
+/* ---------- 랜딩 전용 ---------- */
+.display { font-family: var(--font-display); letter-spacing: -0.01em; }
+.grain::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-1 { animation-delay: 0.05s } .rise-2 { animation-delay: 0.18s } .rise-3 { animation-delay: 0.32s } .rise-4 { animation-delay: 0.46s } .rise-5 { animation-delay: 0.6s }
+@keyframes drift { 0% { transform: translate3d(0,0,0) } 50% { transform: translate3d(0,-10px,0) } 100% { transform: translate3d(0,0,0) } }
+.drift { animation: drift 7s ease-in-out infinite; }
+.ticker { display: flex; gap: 3rem; white-space: nowrap; animation: ticker 28s linear infinite; }
+@keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@media (prefers-reduced-motion: reduce) { .rise, .drift, .ticker { animation: none !important; } }
+.recipe-card { transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; }
+.recipe-card:hover { transform: translateY(-6px) rotate(-0.4deg); box-shadow: 0 24px 40px -24px rgba(8,77,42,.45); }
