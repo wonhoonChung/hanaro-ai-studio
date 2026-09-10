@@ -18,7 +18,7 @@ export default async function AdminJobs({ searchParams }: PageProps<"/admin/jobs
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">작업 로그</h1><p className="mt-1 text-sm text-muted">최근 100건 · 실패 원인과 크레딧 환불 여부를 확인합니다.</p></div>
+        <div><h1 className="text-2xl font-bold">작업 로그</h1><p className="mt-1 text-sm text-muted">최근 100건 · 실패 원인과 바나나 환불 여부를 확인합니다.</p></div>
         <div className="flex gap-2 text-sm">
           <Link href="/admin/jobs" className={`btn-secondary ${!onlyFailed ? "border-brand" : ""}`}>전체</Link>
           <Link href="/admin/jobs?failed=1" className={`btn-secondary ${onlyFailed ? "border-brand" : ""}`}>실패만</Link>
@@ -26,7 +26,7 @@ export default async function AdminJobs({ searchParams }: PageProps<"/admin/jobs
       </div>
       <div className="card overflow-x-auto p-0">
         <table className="w-full min-w-[900px] text-sm">
-          <thead className="bg-brand-soft text-left text-brand-deep"><tr><th className="px-4 py-2">일시</th><th className="px-4 py-2">회원</th><th className="px-4 py-2">종류</th><th className="px-4 py-2">상태</th><th className="px-4 py-2">단계</th><th className="px-4 py-2">크레딧</th><th className="px-4 py-2">오류</th></tr></thead>
+          <thead className="bg-brand-soft text-left text-brand-deep"><tr><th className="px-4 py-2">일시</th><th className="px-4 py-2">회원</th><th className="px-4 py-2">종류</th><th className="px-4 py-2">상태</th><th className="px-4 py-2">단계</th><th className="px-4 py-2">바나나</th><th className="px-4 py-2">오류</th></tr></thead>
           <tbody>
             {rows.map((j) => (
               <tr key={j.id} className="border-t border-line align-top">

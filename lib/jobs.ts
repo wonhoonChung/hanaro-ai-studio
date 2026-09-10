@@ -20,7 +20,7 @@ export type StepResult = { next: string } | { done: true };
 
 export type Pipeline = {
   firstStep: string;
-  /** 단계 실행. 예외를 던지면 job 실패 + 크레딧 환불 */
+  /** 단계 실행. 예외를 던지면 job 실패 + 바나나 환불 */
   run: (ctx: JobContext, step: string) => Promise<StepResult>;
 };
 
@@ -35,9 +35,7 @@ export class SubscriptionRequired extends Error {
 
 export async function createJob(p: { userId: string; type: JobType; projectId: string | null; input: Record<string, unknown>; credits: number }): Promise<Job> {
   const db = adminClient();
-  const { data: sub } = await db.from("subscriptions").select("status").eq("user_id", p.userId).maybeSingle();
-  if (sub?.status !== "active") throw new SubscriptionRequired();
-
+  // 구독은 게이트가 아니다: 충전 바나나만으로도 사용 가능. 잔고 부족은 deduct_credits가 판단.
   const { data: job, error } = await db
     .from("jobs")
     .insert({ user_id: p.userId, type: p.type, project_id: p.projectId, input: p.input, credits: p.credits, status: "queued", step: getPipeline(p.type).firstStep })

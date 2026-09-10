@@ -3,13 +3,13 @@
 농축협 디지털 프로젝트과정 강의안의 산출물(문서 HWP · 뉴스레터 · 카드뉴스 · 홍보영상 30초 · 뮤직비디오 1분)을
 한 곳에서 최고 품질 API로 만드는 **정액 구독형 웹 서비스**입니다.
 
-| 제작실 | 흐름 | 크레딧(기본) |
+| 제작실 | 흐름 | 바나나(기본) |
 |---|---|---|
-| 문서 · HWP | Claude 구조화 초안 → HWPX(한글 2014+) 조립 | 1 |
-| 뉴스레터 | Claude 5섹션 원고 → GPT Image 카톡용 3:4 이미지 | 2 |
-| 카드뉴스 | Claude 장별 문구 → GPT Image 3~6장 → ZIP | 장당 1 |
-| 홍보영상 30초 | Claude 3컷 설계 → Seedance 클립 3개 + CTA 포스터 → ffmpeg 자막·합성 | 20 |
-| 뮤직비디오 1분 | Claude 가사·장면 → ElevenLabs 음원 → Seedance 4장면 → ffmpeg 합성 | 30 |
+| 문서 · HWP | Claude 구조화 초안 → HWPX(한글 2014+) 조립 | 3 |
+| 뉴스레터 | Claude 5섹션 원고 → GPT Image 카톡용 3:4 이미지 | 8 |
+| 카드뉴스 | Claude 장별 문구 → GPT Image 3~6장 → ZIP | 장당 5 |
+| 홍보영상 30초 | Claude 3컷 설계 → Seedance 클립 3개 + CTA 포스터 → ffmpeg 자막·합성 | 55 |
+| 뮤직비디오 1분 | Claude 가사·장면 → ElevenLabs 음원 → Seedance 4장면 → ffmpeg 합성 | 110 |
 
 | 역할 | API |
 |---|---|
@@ -49,7 +49,7 @@ npm run build
 
 ## 3. Supabase 설정
 
-1. Supabase 대시보드 → **SQL Editor** → `supabase/migrations/0001_init.sql` 전체를 붙여넣고 실행.
+1. Supabase 대시보드 → **SQL Editor** → `supabase/migrations/0001_init.sql`, 이어서 `0002_banana.sql`을 붙여넣고 실행.
    테이블·RLS·크레딧 함수(`deduct_credits`/`add_credits`/`set_credits`)·Storage 버킷(`uploads`, `outputs`)이 만들어집니다.
 2. **Authentication → Providers**: Email 활성화. 구글 로그인은 Google 제공자에 OAuth 클라이언트 등록 후
    Redirect URL에 `https://<프로젝트>.supabase.co/auth/v1/callback` 추가.
@@ -99,7 +99,12 @@ supabase/       마이그레이션 SQL
 tests/          Vitest 단위 테스트
 ```
 
-## 8. 요금·크레딧
+## 8. 바나나 요금정책 (지니젠 벤치마크)
 
-관리자 화면(`/admin/settings`)에서 월 요금, 월 크레딧, 작업별 단가를 바꿀 수 있습니다.
-기본값: 월 99,000원 · 200 크레딧 · 문서 1 / 뉴스레터 2 / 카드뉴스 장당 1 / 홍보영상 20 / 뮤직비디오 30.
+- **1 바나나 = 정가 100원**. 정책 상세: `docs/superpowers/specs/2026-09-10-banana-pricing.md`
+- 충전 패키지: 베이직 120B 10,000원 · 밸류 625B 50,000원 · 프로 1,300B 100,000원 · 비즈니스 6,750B 500,000원 · 엔터프라이즈 14,300B 1,000,000원 (바나나당 83→70원)
+- 월 정액 99,000원 → 매월 1,300B 지급(이월 없음). 충전분은 무기한. 가입 보너스 30B.
+- 소모: 문서 3 · 뉴스레터 8 · 카드뉴스 장당 5 · 홍보영상 30초 55 · 뮤직비디오 1분 110
+- 관리자 화면(`/admin/settings`)에서 월 요금·월 지급량·소모량을, `banana_packages` 테이블에서 패키지를 바꿀 수 있습니다.
+- 마이그레이션: `0001_init.sql` 다음에 **`0002_banana.sql`**을 실행해야 합니다.
+- 충전 결제는 토스 일반결제(결제창)이며 서버가 `/v1/payments/confirm`으로 승인한 뒤 바나나를 지급합니다.

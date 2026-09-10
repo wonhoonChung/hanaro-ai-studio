@@ -3,6 +3,7 @@ import { requireProfile, getSubscription, isSubscribed } from "@/lib/auth";
 import { signOut } from "@/app/auth/actions";
 import { Logo } from "@/components/Logo";
 import { StudioNav } from "@/components/StudioNav";
+import { totalBananas } from "@/lib/credits";
 
 export default async function StudioLayout({ children }: { children: React.ReactNode }) {
   const profile = await requireProfile();
@@ -25,15 +26,15 @@ export default async function StudioLayout({ children }: { children: React.React
           <div className="md:hidden"><Logo href="/studio" /></div>
           <div className="hidden text-sm text-muted md:block">{profile.org_name ? `${profile.org_name} · ` : ""}{profile.name || profile.email}</div>
           <div className="flex items-center gap-3">
-            <Link href="/studio/billing" className="badge bg-gold-soft text-[#7a5d00]">크레딧 {profile.credits}</Link>
+            <Link href="/studio/billing" className="badge bg-gold-soft text-[#7a5d00]">🍌 {totalBananas(profile).toLocaleString()}</Link>
             <span className={`badge ${subscribed ? "bg-brand-soft text-brand-deep" : "bg-gray-100 text-muted"}`}>{subscribed ? "구독 중" : "미구독"}</span>
             <form action={signOut}><button className="text-sm text-muted hover:text-foreground">로그아웃</button></form>
           </div>
         </header>
 
-        {!subscribed && (
+        {!subscribed && totalBananas(profile) < 8 && (
           <div className="border-b border-gold/40 bg-gold-soft px-6 py-2 text-sm text-[#7a5d00]">
-            제작실을 사용하려면 구독이 필요합니다. <Link href="/studio/billing" className="font-semibold underline">구독 시작하기</Link>
+            바나나가 부족하면 <Link href="/studio/billing" className="font-semibold underline">충전</Link>하거나 월 정액을 시작하세요. 가입 보너스 30개로 문서·뉴스레터를 먼저 만들어 볼 수 있습니다.
           </div>
         )}
 

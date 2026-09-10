@@ -11,7 +11,7 @@ const STEPS = {
   compose: "장면을 잇고 음원·자막을 입히는 중 (ffmpeg)",
 };
 
-export function MvClient({ projects, preselect, orgName, credits, subscribed }: { projects: Project[]; preselect: string | null; orgName: string | null; credits: number; subscribed: boolean }) {
+export function MvClient({ projects, preselect, orgName, credits }: { projects: Project[]; preselect: string | null; orgName: string | null; credits: number}) {
   const [projectId, setProjectId] = useState<string>(preselect ?? "");
   const [genre, setGenre] = useState<MvGenre>("trot");
   const [org, setOrg] = useState(orgName ?? "");
@@ -53,7 +53,6 @@ export function MvClient({ projects, preselect, orgName, credits, subscribed }: 
         type="music_video"
         projectId={projectId || null}
         credits={credits}
-        disabled={!subscribed}
         steps={STEPS}
         buttonLabel="뮤직비디오 만들기"
         buildInput={() => {

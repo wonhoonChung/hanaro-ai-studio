@@ -6,7 +6,7 @@ import type { Project } from "@/lib/types";
 
 const STEPS = { plan: "Claude가 문서 초안을 작성하는 중", build: "한글(HWPX) 파일로 조립하는 중" };
 
-export function DocumentClient({ projects, preselect, orgName, credits, subscribed }: { projects: Project[]; preselect: string | null; orgName: string | null; credits: number; subscribed: boolean }) {
+export function DocumentClient({ projects, preselect, orgName, credits }: { projects: Project[]; preselect: string | null; orgName: string | null; credits: number}) {
   const [projectId, setProjectId] = useState<string>(preselect ?? "");
   const [docType, setDocType] = useState<DocType>("plan");
   const [title, setTitle] = useState("");
@@ -62,7 +62,6 @@ export function DocumentClient({ projects, preselect, orgName, credits, subscrib
         type="document"
         projectId={projectId || null}
         credits={credits}
-        disabled={!subscribed}
         steps={STEPS}
         buttonLabel="문서 만들기"
         buildInput={() => {

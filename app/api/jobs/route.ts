@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { advanceJob, createJob, SubscriptionRequired } from "@/lib/jobs";
+import { advanceJob, createJob } from "@/lib/jobs";
 import { costFor, getCosts, InsufficientCredits } from "@/lib/credits";
 import { checkPII } from "@/lib/pii";
 import type { JobType } from "@/lib/types";
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     const advanced = await advanceJob(job.id, user.id);
     return NextResponse.json({ job: advanced });
   } catch (e) {
-    const status = e instanceof SubscriptionRequired ? 402 : e instanceof InsufficientCredits ? 402 : 500;
+    const status = e instanceof InsufficientCredits ? 402 : 500;
     return NextResponse.json({ error: e instanceof Error ? e.message : "작업을 시작할 수 없습니다." }, { status });
   }
 }

@@ -8,11 +8,11 @@ import { JOB_TYPE_LABEL } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 const rooms = [
-  { n: "01", title: "문서 · HWP", tool: "Claude → 한글(HWPX)", desc: "기획서·공문·보고서·보도자료. 읽기는 AI가, 쓰기는 규격대로, 확인은 사람이.", href: "/studio/document", credit: "1" },
-  { n: "02", title: "뉴스레터", tool: "Claude → GPT Image", desc: "5섹션 황금 구조 원고와 카톡 전송용 이미지 1장. 열지 않아도 읽힙니다.", href: "/studio/newsletter", credit: "2" },
-  { n: "03", title: "카드뉴스", tool: "Claude → GPT Image", desc: "첫 장은 후크, 마지막 장은 행동 유도. 스타일 사전 5종, 3~6장.", href: "/studio/cardnews", credit: "장당 1" },
-  { n: "04", title: "홍보영상 30초", tool: "Claude → Seedance → 자막", desc: "후크 3초 · 메시지 20초 · CTA 7초. 무음으로 봐도 이해되는 3컷.", href: "/studio/promo-video", credit: "20" },
-  { n: "05", title: "뮤직비디오 1분", tool: "Claude → ElevenLabs → Seedance", desc: "우리 조합 응원송. 가사 → 작곡 → 장면 4개 → 후렴 자막.", href: "/studio/music-video", credit: "30" },
+  { n: "01", title: "문서 · HWP", tool: "Claude → 한글(HWPX)", desc: "기획서·공문·보고서·보도자료. 읽기는 AI가, 쓰기는 규격대로, 확인은 사람이.", href: "/studio/document", credit: "3" },
+  { n: "02", title: "뉴스레터", tool: "Claude → GPT Image", desc: "5섹션 황금 구조 원고와 카톡 전송용 이미지 1장. 열지 않아도 읽힙니다.", href: "/studio/newsletter", credit: "8" },
+  { n: "03", title: "카드뉴스", tool: "Claude → GPT Image", desc: "첫 장은 후크, 마지막 장은 행동 유도. 스타일 사전 5종, 3~6장.", href: "/studio/cardnews", credit: "장당 5" },
+  { n: "04", title: "홍보영상 30초", tool: "Claude → Seedance → 자막", desc: "후크 3초 · 메시지 20초 · CTA 7초. 무음으로 봐도 이해되는 3컷.", href: "/studio/promo-video", credit: "55" },
+  { n: "05", title: "뮤직비디오 1분", tool: "Claude → ElevenLabs → Seedance", desc: "우리 조합 응원송. 가사 → 작곡 → 장면 4개 → 후렴 자막.", href: "/studio/music-video", credit: "110" },
 ];
 
 const steps = [
@@ -105,7 +105,7 @@ export default async function Home() {
               <h3 className="mt-3 text-xl font-bold">{r.title}</h3>
               <p className={`mt-1 text-xs ${i === 3 ? "text-white/60" : "text-brand"}`}>{r.tool}</p>
               <p className={`mt-3 text-sm leading-relaxed ${i === 3 ? "text-white/80" : "text-muted"}`}>{r.desc}</p>
-              <span className={`mt-auto pt-5 text-xs ${i === 3 ? "text-gold" : "text-muted"}`}>크레딧 {r.credit}</span>
+              <span className={`mt-auto pt-5 text-xs ${i === 3 ? "text-gold" : "text-muted"}`}>바나나 {r.credit}</span>
             </Link>
           ))}
         </div>
@@ -173,7 +173,7 @@ export default async function Home() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-16">
           <div>
             <h2 className="display text-3xl font-bold text-brand-deep md:text-4xl">잘 만든 사람보다, 끝까지 만든 사람.</h2>
-            <p className="mt-2 text-muted">월 정액 하나, 크레딧으로 다섯 제작실을 모두 씁니다. 언제든 해지.</p>
+            <p className="mt-2 text-muted">1 바나나 = 100원. 충전하거나 월 정액으로 받아 다섯 제작실을 모두 씁니다. 가입만 해도 30개.</p>
           </div>
           <div className="flex gap-3">
             <Link href={cta.href} className="btn-primary px-6 py-3 text-base">{cta.label}</Link>

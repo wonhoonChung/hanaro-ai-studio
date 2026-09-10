@@ -15,17 +15,17 @@ export default async function AdminSettings({ searchParams }: PageProps<"/admin/
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <div><h1 className="text-2xl font-bold">요금·크레딧 설정</h1><p className="mt-1 text-sm text-muted">변경 즉시 요금 안내와 크레딧 차감에 반영됩니다. 기존 구독자의 다음 결제 금액도 이 값으로 청구됩니다.</p></div>
+      <div><h1 className="text-2xl font-bold">요금·바나나 설정</h1><p className="mt-1 text-sm text-muted">변경 즉시 요금 안내와 바나나 차감에 반영됩니다. 기존 구독자의 다음 결제 금액도 이 값으로 청구됩니다.</p></div>
       {sp.ok && <Alert kind="success">저장되었습니다.</Alert>}
       {typeof sp.error === "string" && <Alert kind="error">{sp.error}</Alert>}
       <form action={savePlanSettings} className="card space-y-5">
         <div><label className="label">요금제 이름</label><input name="name" defaultValue={p.name} className="input" required /></div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div><label className="label">월 요금 (원)</label><input name="price_krw" type="number" min={0} defaultValue={p.price_krw} className="input" required /></div>
-          <div><label className="label">월 크레딧</label><input name="monthly_credits" type="number" min={0} defaultValue={p.monthly_credits} className="input" required /></div>
+          <div><label className="label">월 바나나</label><input name="monthly_credits" type="number" min={0} defaultValue={p.monthly_credits} className="input" required /></div>
         </div>
         <fieldset className="space-y-3">
-          <legend className="label">크레딧 단가</legend>
+          <legend className="label">바나나 단가</legend>
           {Object.keys(COST_LABEL).map((k) => (
             <div key={k} className="flex items-center justify-between gap-4">
               <span className="text-sm">{COST_LABEL[k]}</span>

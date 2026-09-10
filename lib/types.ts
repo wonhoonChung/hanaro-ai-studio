@@ -6,7 +6,8 @@ export type Profile = {
   name: string | null;
   org_name: string | null;
   role: Role;
-  credits: number;
+  credits: number; // 월 지급분(구독)
+  banana_purchased: number; // 충전분(무기한)
   created_at: string;
 };
 
@@ -120,4 +121,17 @@ export const JOB_STATUS_LABEL: Record<JobStatus, string> = {
   running: "생성 중",
   succeeded: "완료",
   failed: "실패",
+};
+
+export type BananaPurchase = {
+  id: string;
+  user_id: string;
+  package_id: string;
+  order_id: string;
+  bananas: number;
+  amount: number;
+  status: "pending" | "paid" | "failed" | "refunded";
+  toss_payment_key: string | null;
+  paid_at: string | null;
+  created_at: string;
 };

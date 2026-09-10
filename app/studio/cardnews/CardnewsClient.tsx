@@ -7,7 +7,7 @@ import type { Project } from "@/lib/types";
 
 const STEPS = { plan: "Claude가 장별 문구를 설계하는 중", image: "장별 이미지를 그리는 중 (GPT Image)", zip: "ZIP으로 묶는 중" };
 
-export function CardnewsClient({ projects, preselect, perPage, subscribed }: { projects: Project[]; preselect: string | null; perPage: number; subscribed: boolean }) {
+export function CardnewsClient({ projects, preselect, perPage }: { projects: Project[]; preselect: string | null; perPage: number}) {
   const [projectId, setProjectId] = useState<string>(preselect ?? projects[0]?.id ?? "");
   const [pages, setPages] = useState(4);
   const [style, setStyle] = useState<CardStyle>("poster");
@@ -51,7 +51,6 @@ export function CardnewsClient({ projects, preselect, perPage, subscribed }: { p
         type="cardnews"
         projectId={projectId}
         credits={perPage * pages}
-        disabled={!subscribed}
         steps={STEPS}
         buttonLabel={`카드뉴스 ${pages}장 만들기`}
         buildInput={() => ({ pages, style, extra: extra || undefined })}

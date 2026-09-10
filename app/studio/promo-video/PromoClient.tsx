@@ -12,7 +12,7 @@ const STEPS = {
   compose: "컷을 잇고 자막을 입히는 중 (ffmpeg)",
 };
 
-export function PromoClient({ projects, preselect, credits, subscribed }: { projects: Project[]; preselect: string | null; credits: number; subscribed: boolean }) {
+export function PromoClient({ projects, preselect, credits }: { projects: Project[]; preselect: string | null; credits: number}) {
   const [projectId, setProjectId] = useState<string>(preselect ?? projects[0]?.id ?? "");
   const [ratio, setRatio] = useState<"16:9" | "9:16">("16:9");
   const [usePhotos, setUsePhotos] = useState(true);
@@ -60,7 +60,6 @@ export function PromoClient({ projects, preselect, credits, subscribed }: { proj
         type="promo_video"
         projectId={projectId}
         credits={credits}
-        disabled={!subscribed}
         steps={STEPS}
         buttonLabel="홍보영상 만들기"
         buildInput={() => ({ ratio, usePhotos, mood: mood || undefined, extra: extra || undefined })}

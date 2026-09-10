@@ -32,7 +32,7 @@ export default async function LibraryPage() {
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <span className="font-semibold">{JOB_TYPE_LABEL[j.type]}</span>
-                  <span className="ml-2 text-xs text-muted">{new Date(j.created_at).toLocaleString("ko-KR")} · 크레딧 {j.credits}</span>
+                  <span className="ml-2 text-xs text-muted">{new Date(j.created_at).toLocaleString("ko-KR")} · 바나나 {j.credits}</span>
                 </div>
                 <span className={`badge ${j.status === "succeeded" ? "bg-brand-soft text-brand-deep" : j.status === "failed" ? "bg-danger-soft text-danger" : "bg-gold-soft text-[#7a5d00]"}`}>{JOB_STATUS_LABEL[j.status]}</span>
               </div>

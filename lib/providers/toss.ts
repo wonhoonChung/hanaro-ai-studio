@@ -55,3 +55,8 @@ export function chargeBillingKey(p: {
   const { billingKey, ...body } = p;
   return post<TossPayment>(`/billing/${encodeURIComponent(billingKey)}`, body);
 }
+
+/** 일반결제(결제창) 승인: 클라이언트 successUrl의 paymentKey·orderId·amount로 서버가 최종 승인 */
+export function confirmPayment(p: { paymentKey: string; orderId: string; amount: number }) {
+  return post<TossPayment>("/payments/confirm", p);
+}

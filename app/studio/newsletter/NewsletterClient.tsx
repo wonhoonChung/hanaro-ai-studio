@@ -7,7 +7,7 @@ import type { Project } from "@/lib/types";
 
 const STEPS = { plan: "Claude가 5섹션 원고를 쓰는 중", image: "카톡용 이미지를 그리는 중 (GPT Image)" };
 
-export function NewsletterClient({ projects, preselect, credits, subscribed }: { projects: Project[]; preselect: string | null; credits: number; subscribed: boolean }) {
+export function NewsletterClient({ projects, preselect, credits }: { projects: Project[]; preselect: string | null; credits: number}) {
   const [projectId, setProjectId] = useState<string>(preselect ?? projects[0]?.id ?? "");
   const [tone, setTone] = useState<keyof typeof TONES>("warm");
   const [season, setSeason] = useState("");
@@ -56,7 +56,6 @@ export function NewsletterClient({ projects, preselect, credits, subscribed }: {
         type="newsletter"
         projectId={projectId}
         credits={credits}
-        disabled={!subscribed}
         steps={STEPS}
         buttonLabel="뉴스레터 만들기"
         buildInput={() => ({ tone, season: season || undefined, phone: phone || undefined, extra: extra || undefined })}

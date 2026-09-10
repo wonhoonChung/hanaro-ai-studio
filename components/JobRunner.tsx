@@ -74,7 +74,7 @@ export function JobRunner({ type, projectId, buildInput, credits, steps, renderR
         <button onClick={start} disabled={busy || disabled} className="btn-primary">
           {busy ? "생성 중…" : buttonLabel ?? "생성하기"}
         </button>
-        <span className="text-sm text-muted">크레딧 {credits} 차감 · 실패 시 자동 환불</span>
+        <span className="text-sm text-muted">바나나 {credits} 차감 · 실패 시 자동 환불</span>
       </div>
       {error && <div className="rounded-lg border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger">{error}</div>}
 
@@ -89,7 +89,7 @@ export function JobRunner({ type, projectId, buildInput, credits, steps, renderR
       )}
       {job?.status === "failed" && (
         <div className="rounded-lg border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger">
-          <b>실패:</b> {job.error ?? "알 수 없는 오류"} · 크레딧은 환불되었습니다.
+          <b>실패:</b> {job.error ?? "알 수 없는 오류"} · 바나나은 환불되었습니다.
         </div>
       )}
       {job?.status === "succeeded" && result && renderResult(result)}

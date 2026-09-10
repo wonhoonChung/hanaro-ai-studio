@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireProfile, getSubscription, isSubscribed } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { JOB_STATUS_LABEL, JOB_TYPE_LABEL, type Job, type Project } from "@/lib/types";
+import { totalBananas } from "@/lib/credits";
 
 export const metadata = { title: "대시보드" };
 
@@ -37,7 +38,7 @@ export default async function StudioHome({ searchParams }: PageProps<"/studio">)
       </div>
 
       <section className="grid gap-4 sm:grid-cols-3">
-        <div className="card"><p className="text-sm text-muted">잔여 크레딧</p><p className="text-3xl font-black mt-1">{profile.credits}</p></div>
+        <div className="card"><p className="text-sm text-muted">잔여 바나나</p><p className="text-3xl font-black mt-1">🍌 {totalBananas(profile).toLocaleString()}</p></div>
         <div className="card"><p className="text-sm text-muted">구독</p><p className="text-lg font-semibold mt-1">{isSubscribed(sub) ? "구독 중" : "미구독"}</p>
           {sub?.next_billing_at && isSubscribed(sub) && <p className="hint">다음 결제 {new Date(sub.next_billing_at).toLocaleDateString("ko-KR")}</p>}</div>
         <div className="card"><p className="text-sm text-muted">프로젝트</p><p className="text-3xl font-black mt-1">{projects?.length ?? 0}</p></div>
