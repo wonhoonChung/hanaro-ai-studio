@@ -1,10 +1,10 @@
 import type { JobType, Profile } from "@/lib/types";
 import { adminClient } from "@/lib/supabase/admin";
 
-/** 1 바나나 = 정가 100원 (지니젠 벤치마크) */
+/** 1 ro = 정가 100원 (지니젠 벤치마크) */
 export const BANANA_KRW = 100;
 
-/** 산출물 단위 바나나 소모량 (기본값, 관리자 수정 가능) */
+/** 산출물 단위 ro 소모량 (기본값, 관리자 수정 가능) */
 export const DEFAULT_COSTS: Record<string, number> = {
   document: 3,
   newsletter: 8,
@@ -29,7 +29,7 @@ export const COST_DETAIL: Record<string, string> = {
   music_video: "가사·장면 설계 + ElevenLabs 1분 + Seedance 60초 + 합성",
 };
 
-/** 작업 종류·옵션에 따른 바나나 소모량 (순수 함수) */
+/** 작업 종류·옵션에 따른 ro 소모량 (순수 함수) */
 export function costFor(type: JobType, costs: Record<string, number>, opts: { pages?: number } = {}): number {
   if (type === "cardnews") {
     const per = costs.cardnews_page ?? DEFAULT_COSTS.cardnews_page;
@@ -38,7 +38,7 @@ export function costFor(type: JobType, costs: Record<string, number>, opts: { pa
   return costs[type] ?? DEFAULT_COSTS[type];
 }
 
-/** 총 잔여 바나나 = 월 지급분 + 충전분 */
+/** 총 잔여 ro = 월 지급분 + 충전분 */
 export const totalBananas = (p: Pick<Profile, "credits" | "banana_purchased">) => (p.credits ?? 0) + (p.banana_purchased ?? 0);
 
 export const krw = (n: number) => n.toLocaleString("ko-KR") + "원";
@@ -50,7 +50,7 @@ export async function getCosts(): Promise<Record<string, number>> {
 
 export class InsufficientCredits extends Error {
   constructor() {
-    super("바나나가 부족합니다. 바나나를 충전하거나 구독을 시작해 주세요.");
+    super("ro가 부족합니다. ro를 충전하거나 구독을 시작해 주세요.");
     this.name = "InsufficientCredits";
   }
 }

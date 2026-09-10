@@ -26,7 +26,7 @@ export default async function AdminHome({ searchParams }: PageProps<"/admin">) {
       <div className="card overflow-x-auto p-0">
         <table className="w-full min-w-[900px] text-sm">
           <thead className="bg-brand-soft text-left text-brand-deep">
-            <tr><th className="px-4 py-2">회원</th><th className="px-4 py-2">역할</th><th className="px-4 py-2">구독</th><th className="px-4 py-2">다음 결제</th><th className="px-4 py-2">바나나</th><th className="px-4 py-2">조정</th></tr>
+            <tr><th className="px-4 py-2">회원</th><th className="px-4 py-2">역할</th><th className="px-4 py-2">구독</th><th className="px-4 py-2">다음 결제</th><th className="px-4 py-2">ro</th><th className="px-4 py-2">조정</th></tr>
           </thead>
           <tbody>
             {rows.map((r) => {

@@ -105,7 +105,7 @@ export default async function Home() {
               <h3 className="mt-3 text-xl font-bold">{r.title}</h3>
               <p className={`mt-1 text-xs ${i === 3 ? "text-white/60" : "text-brand"}`}>{r.tool}</p>
               <p className={`mt-3 text-sm leading-relaxed ${i === 3 ? "text-white/80" : "text-muted"}`}>{r.desc}</p>
-              <span className={`mt-auto pt-5 text-xs ${i === 3 ? "text-gold" : "text-muted"}`}>바나나 {r.credit}</span>
+              <span className={`mt-auto pt-5 text-xs ${i === 3 ? "text-gold" : "text-muted"}`}>ro {r.credit}</span>
             </Link>
           ))}
         </div>
@@ -173,7 +173,7 @@ export default async function Home() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-16">
           <div>
             <h2 className="display text-3xl font-bold text-brand-deep md:text-4xl">잘 만든 사람보다, 끝까지 만든 사람.</h2>
-            <p className="mt-2 text-muted">1 바나나 = 100원. 충전하거나 월 정액으로 받아 다섯 제작실을 모두 씁니다. 가입만 해도 30개.</p>
+            <p className="mt-2 text-muted">1 ro = 100원. 충전하거나 월 정액으로 받아 다섯 제작실을 모두 씁니다. 가입만 해도 30개.</p>
           </div>
           <div className="flex gap-3">
             <Link href={cta.href} className="btn-primary px-6 py-3 text-base">{cta.label}</Link>

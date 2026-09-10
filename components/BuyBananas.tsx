@@ -59,12 +59,12 @@ export function BuyBananas({ packages, customerKey, email, name }: Props) {
                 <span className="font-semibold">{p.name}</span>
                 {p.id === "basic" && <span className="badge bg-gold-soft text-[#7a5d00]">가장 인기</span>}
               </div>
-              <div className="mt-0.5 text-sm"><b className="text-brand-deep">{p.bananas.toLocaleString()}</b> 바나나 · <b>{p.price_krw.toLocaleString()}원</b> <s className="text-xs text-muted">{p.list_price_krw.toLocaleString()}원</s></div>
+              <div className="mt-0.5 text-sm"><b className="text-brand-deep">{p.bananas.toLocaleString()}</b> ro · <b>{p.price_krw.toLocaleString()}원</b> <s className="text-xs text-muted">{p.list_price_krw.toLocaleString()}원</s></div>
               {p.description && <div className="text-xs text-muted">{p.description}</div>}
             </div>
             <div className="text-right text-xs">
               <div className="badge bg-danger-soft text-danger">-{pct(p)}%</div>
-              <div className="mt-1 text-muted"><s>₩100</s> <b className="text-brand-deep">바나나당 {per(p)}원</b></div>
+              <div className="mt-1 text-muted"><s>₩100</s> <b className="text-brand-deep">ro당 {per(p)}원</b></div>
             </div>
           </button>
         ))}
@@ -72,14 +72,14 @@ export function BuyBananas({ packages, customerKey, email, name }: Props) {
       {pkg && (
         <div className="rounded-xl border border-line bg-white p-4 text-sm">
           <div className="flex justify-between"><span className="text-muted">선택한 패키지</span><b>{pkg.name}</b></div>
-          <div className="flex justify-between"><span className="text-muted">바나나</span><b>{pkg.bananas.toLocaleString()}개</b></div>
+          <div className="flex justify-between"><span className="text-muted">ro</span><b>{pkg.bananas.toLocaleString()}개</b></div>
           <div className="flex justify-between"><span className="text-muted">할인</span><b className="text-brand">-{pct(pkg)}%</b></div>
           <div className="mt-2 flex justify-between border-t border-line pt-2 text-base"><span>총 결제 금액</span><b className="text-brand-deep">{pkg.price_krw.toLocaleString()}원</b></div>
         </div>
       )}
       <button onClick={buy} disabled={busy || !pkg} className="btn-primary w-full text-base">{busy ? "결제창 여는 중…" : "국내 카드 결제"}</button>
       {error && <p className="text-sm text-danger">{error}</p>}
-      <p className="hint">충전 바나나는 유효기간이 없습니다. 구매 후 7일 이내 미사용분은 환불되며, 7일 초과 시 환불되지 않습니다. 무료 지급분은 환불 대상이 아닙니다.</p>
+      <p className="hint">충전 ro는 유효기간이 없습니다. 구매 후 7일 이내 미사용분은 환불되며, 7일 초과 시 환불되지 않습니다. 무료 지급분은 환불 대상이 아닙니다.</p>
     </div>
   );
 }

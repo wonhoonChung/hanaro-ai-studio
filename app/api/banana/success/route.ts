@@ -5,7 +5,7 @@ import { confirmPayment } from "@/lib/providers/toss";
 
 export const maxDuration = 60;
 
-/** 토스 결제창 성공 리다이렉트 (?paymentKey=&orderId=&amount=) → 서버 승인 → 바나나 충전 */
+/** 토스 결제창 성공 리다이렉트 (?paymentKey=&orderId=&amount=) → 서버 승인 → ro 충전 */
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const paymentKey = searchParams.get("paymentKey");

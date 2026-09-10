@@ -23,7 +23,7 @@ async function loadPlan(): Promise<PlanSettings> {
   return data as PlanSettings;
 }
 
-/** 결제창에서 카드 등록 완료(authKey) → 빌링키 발급 → 첫 결제 → 구독 활성화 + 바나나 지급 */
+/** 결제창에서 카드 등록 완료(authKey) → 빌링키 발급 → 첫 결제 → 구독 활성화 + ro 지급 */
 export async function activateSubscription(userId: string, authKey: string) {
   const db = adminClient();
   const customerKey = customerKeyFor(userId);
@@ -75,7 +75,7 @@ export async function activateSubscription(userId: string, authKey: string) {
 
 type DueRow = Subscription & { profiles: { email: string; name: string | null } | null };
 
-/** Cron: 결제일이 지난 활성 구독을 청구하고 바나나을 월 바나나으로 재설정 */
+/** Cron: 결제일이 지난 활성 구독을 청구하고 ro를 월 ro로 재설정 */
 export async function runMonthlyBilling() {
   const db = adminClient();
   const plan = await loadPlan();

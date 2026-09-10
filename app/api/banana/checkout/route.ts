@@ -24,5 +24,5 @@ export async function POST(request: Request) {
     .insert({ user_id: user.id, package_id: pkg.id, order_id: orderId, bananas: pkg.bananas, amount: pkg.price_krw, status: "pending" });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  return NextResponse.json({ orderId, amount: pkg.price_krw, orderName: `하나로AI스튜디오 바나나 ${pkg.bananas.toLocaleString()}개 (${pkg.name})` });
+  return NextResponse.json({ orderId, amount: pkg.price_krw, orderName: `하나로AI스튜디오 ro ${pkg.bananas.toLocaleString()}개 (${pkg.name})` });
 }

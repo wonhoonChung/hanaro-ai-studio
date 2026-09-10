@@ -1,9 +1,9 @@
--- 바나나 요금정책 (지니젠 벤치마크) — 0001 적용 후 실행
+-- ro 요금정책 (지니젠 벤치마크) — 0001 적용 후 실행
 
 -- 1) 충전분 잔고 분리: credits = 월 지급(구독, 결제일마다 재설정) / banana_purchased = 충전분(무기한)
 alter table profiles add column if not exists banana_purchased integer not null default 0;
 
--- 2) 단가 기본값 갱신 (바나나 단위)
+-- 2) 단가 기본값 갱신 (ro 단위)
 update plan_settings set
   name = '하나로AI스튜디오 월 정액',
   price_krw = 99000,
@@ -26,7 +26,7 @@ create table if not exists banana_packages (
 insert into banana_packages (id, name, bananas, price_krw, list_price_krw, description, sort) values
   ('basic',      '베이직',      120,   10000,   12000, '가장 인기 있는 패키지', 1),
   ('value',      '밸류',        625,   50000,   62500, '정기 사용자 추천', 2),
-  ('pro',        '프로',        1300,  100000,  130000, '전문가용 바나나 패키지', 3),
+  ('pro',        '프로',        1300,  100000,  130000, '전문가용 ro 패키지', 3),
   ('business',   '비즈니스',    6750,  500000,  675000, '기업·조합 단위 대용량', 4),
   ('enterprise', '엔터프라이즈', 14300, 1000000, 1430000, '최상위 기업용', 5)
 on conflict (id) do update set name = excluded.name, bananas = excluded.bananas, price_krw = excluded.price_krw, list_price_krw = excluded.list_price_krw, description = excluded.description, sort = excluded.sort;
