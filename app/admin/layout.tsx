@@ -8,6 +8,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const tabs = [
     { href: "/admin", label: "회원·구독" },
     { href: "/admin/jobs", label: "작업 로그" },
+    { href: "/admin/gallery", label: "갤러리 공개" },
     { href: "/admin/settings", label: "요금·크레딧 설정" },
   ];
   return (

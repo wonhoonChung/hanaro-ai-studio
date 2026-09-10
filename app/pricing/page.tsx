@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { adminClient } from "@/lib/supabase/admin";
-import { getProfile } from "@/lib/auth";
+import { getProfile, supabaseConfigured } from "@/lib/auth";
 import { COST_LABEL, DEFAULT_COSTS } from "@/lib/credits";
 import { SiteHeader } from "@/components/SiteHeader";
 import type { PlanSettings } from "@/lib/types";
@@ -9,11 +9,13 @@ export const metadata = { title: "요금 안내" };
 export const dynamic = "force-dynamic";
 
 export default async function PricingPage() {
-  const [{ data: plan }, profile] = await Promise.all([
-    adminClient().from("plan_settings").select("*").eq("id", 1).single(),
-    getProfile(),
-  ]);
-  const p = (plan as PlanSettings | null) ?? { name: "하나로AI스튜디오 월 정액", price_krw: 99000, monthly_credits: 200, credit_costs: DEFAULT_COSTS };
+  const profile = await getProfile();
+  let plan: PlanSettings | null = null;
+  if (supabaseConfigured()) {
+    const { data } = await adminClient().from("plan_settings").select("*").eq("id", 1).single();
+    plan = data as PlanSettings | null;
+  }
+  const p = plan ?? { name: "하나로AI스튜디오 월 정액", price_krw: 99000, monthly_credits: 200, credit_costs: DEFAULT_COSTS };
   const costs = { ...DEFAULT_COSTS, ...p.credit_costs };
 
   return (

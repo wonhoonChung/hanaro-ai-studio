@@ -2,7 +2,10 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile, Subscription } from "@/lib/types";
 
+export const supabaseConfigured = () => Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
 export async function getProfile(): Promise<Profile | null> {
+  if (!supabaseConfigured()) return null;
   const supabase = await createClient();
   const {
     data: { user },
